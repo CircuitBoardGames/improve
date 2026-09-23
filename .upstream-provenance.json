@@ -1,0 +1,6 @@
+{
+  "true_upstream": "https://github.com/shadcn/improve",
+  "true_upstream_branch": "main",
+  "last_synced_upstream_sha": "cac56e1ebd3c279aa9153616cfeac7b174ab90f9",
+  "note": "Provenance marker for the CircuitBoardGames/ClaudeCode maintainer agent's P2 vendor-sync drift check. last_synced_upstream_sha is this fork's merge-base with true_upstream (plugin.json 1.0.0); advance it in each true-upstream->fork sync PR. Seeded 2026-09-23 at fork creation (hub#1476: the operator reversed improve's retirement and forked it instead). No divergence from upstream yet; hub fixes to the skill land here as fork commits."
+}
