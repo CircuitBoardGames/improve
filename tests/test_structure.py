@@ -52,3 +52,13 @@ def test_upstream_provenance_marker_is_readable():
     assert m["true_upstream"].startswith("https://github.com/"), m
     assert m["true_upstream_branch"], m
     assert re.fullmatch(r"[0-9a-f]{40}", m["last_synced_upstream_sha"]), m
+
+
+def test_no_absence_check_is_taught_with_a_recursive_grep():
+    # The fork's one divergence (hub#1476, hub#1274): a recursive `grep -r` under Claude Code's
+    # ugrep wrapper silently skips gitignored and binary files, so "no matches" proves nothing.
+    bare = re.compile(r"(?<![\w-])grep\s+-[A-Za-z]*r[A-Za-z]*\b")
+    hits = [f"{p.relative_to(ROOT)}:{n}" for d in ("skills", "examples") for p in (ROOT / d).rglob("*.md")
+            for n, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1)
+            if bare.search(line) and "not a recursive" not in line]
+    assert not hits, hits

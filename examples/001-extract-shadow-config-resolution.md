@@ -140,7 +140,7 @@ Replace the block at ~91–115 with a call to `resolveShadowConfig(options.cwd, 
 
 Replace the block at ~36–55 with `resolveShadowConfig(options.cwd)` (no seed — preserves its current bare-defaults behavior). Clean up unused imports.
 
-**Verify**: `pnpm shadcn:test` → pass; `pnpm check` → exit 0; `grep -rn "shadow config" packages/shadcn/src/commands/` → no matches.
+**Verify**: `pnpm shadcn:test` → pass; `pnpm check` → exit 0; `git grep -n "shadow config" -- packages/shadcn/src/commands/` → no matches.
 
 ## Test plan
 
@@ -152,7 +152,7 @@ Replace the block at ~36–55 with `resolveShadowConfig(options.cwd)` (no seed �
 
 - [ ] `pnpm shadcn:test` exits 0; 4 new tests for `resolveShadowConfig` exist and pass
 - [ ] `pnpm check` exits 0
-- [ ] `grep -rn "TODO: We're duplicating logic for shadowConfig" packages/shadcn/src/` returns no matches (comment removed with the duplication)
+- [ ] `git grep -n "TODO: We're duplicating logic for shadowConfig" -- packages/shadcn/src/` returns no matches (comment removed with the duplication)
 - [ ] Both `search.ts` and `view.ts` call `resolveShadowConfig`; neither contains an inline shadow-config block
 - [ ] No files outside the in-scope list are modified (`git status`)
 - [ ] `plans/README.md` status row updated

@@ -131,7 +131,7 @@ Machine-checkable. ALL must hold:
 
 - [ ] `pnpm typecheck` exits 0
 - [ ] `pnpm test` exits 0; new tests for <X> exist and pass
-- [ ] `grep -rn "<old pattern>" src/` returns no matches
+- [ ] `git grep -n "<old pattern>" -- src/` returns no matches. Use `git grep`, not a recursive `grep -r`: some agent shells wrap `grep` (Claude Code runs ugrep with `--ignore-files -I`), so a recursive walk silently skips gitignored and binary-looking files and still exits 0. `git grep` reads exactly the tracked files, the same way in every shell.
 - [ ] No files outside the in-scope list are modified (`git status`)
 - [ ] `plans/README.md` status row updated
 
