@@ -55,10 +55,19 @@ def test_upstream_provenance_marker_is_readable():
 
 
 def test_no_absence_check_is_taught_with_a_recursive_grep():
-    # The fork's one divergence (hub#1476, hub#1274): a recursive `grep -r` under Claude Code's
+    # The fork's first divergence (hub#1476, hub#1274): a recursive `grep -r` under Claude Code's
     # ugrep wrapper silently skips gitignored and binary files, so "no matches" proves nothing.
     bare = re.compile(r"(?<![\w-])grep\s+-[A-Za-z]*r[A-Za-z]*\b")
     hits = [f"{p.relative_to(ROOT)}:{n}" for d in ("skills", "examples") for p in (ROOT / d).rglob("*.md")
             for n, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1)
             if bare.search(line) and "not a recursive" not in line]
     assert not hits, hits
+
+
+def test_diff_reviews_run_through_open_code_review():
+    # The fork's second divergence: `execute` and `branch` review a diff with the hub's
+    # open-code-review-delegate skill, never its Fix step (Hard Rule 1). An upstream sync that
+    # rewrites either passage must carry this across rather than drop it silently.
+    for rel in ("skills/improve/SKILL.md", "skills/improve/references/closing-the-loop.md"):
+        text = (ROOT / rel).read_text(encoding="utf-8")
+        assert "open-code-review-delegate" in text and "Fix step" in text, rel

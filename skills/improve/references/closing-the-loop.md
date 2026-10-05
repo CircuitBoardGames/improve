@@ -53,7 +53,7 @@ Review like a tech lead reviewing a PR against the spec — never fix anything y
 
 1. **Re-run every done criterion** in the worktree. Don't trust the executor's report — verify.
 2. **Scope compliance**: `git -C <worktree> diff --stat` against the plan's in-scope list. Any file outside scope fails review, full stop.
-3. **Read the full diff.** Judge it against "Why this matters" (does it solve the actual problem?) and the repo conventions named in the plan (does it look like the rest of the codebase?).
+3. **Review the full diff with the `open-code-review-delegate` skill**, not by reading it freehand: `ocr delegate preview --repo <worktree> --from <the commit the worktree was cut from> --to HEAD`, with the plan file as the review's background. Every changed file becomes a checklist entry that ends reviewed against its rule group or skipped with a reason, so no hunk goes unread. Stop at its report and skip its optional Fix step: findings go back to the executor, and an unresolved critical or high finding is a REVISE. OCR does not know the plan, so judging the diff against it stays with you: "Why this matters" (does it solve the actual problem?) and the repo conventions named in the plan (does it look like the rest of the codebase?). If the `ocr` CLI is not installed, read the full diff yourself, file by file.
 4. **Audit the new tests.** Executors game criteria — a test that asserts nothing meaningful passes `pnpm test` and proves nothing. Read what the tests assert.
 
 ### Verdict
