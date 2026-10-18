@@ -1,0 +1,18 @@
+{
+ "generated": {
+  "sha": "6f8b9cb6377a530c1d79e2a895fb8ffb5efa42db",
+  "time": "2026-10-18T20:58:35Z"
+ },
+ "tests": {
+  "tests/test_structure.py": [
+   ".claude-plugin/marketplace.json",
+   ".claude-plugin/plugin.json",
+   ".upstream-provenance.json",
+   "examples/",
+   "skills/",
+   "skills/improve/",
+   "skills/improve/references/",
+   "tests/test_structure.py"
+  ]
+ }
+}

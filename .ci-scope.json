@@ -1,0 +1,7 @@
+{
+  "tests_dir": "tests",
+  "map": "tests/impact-map.json",
+  "path_roots": [".claude-plugin", "examples", "skills", "tests", ".forgejo", ".github"],
+  "machinery": [".forgejo/workflows/python.yml"],
+  "pytest_cmd": ".ci-venv/bin/python -m pytest"
+}
